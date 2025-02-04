@@ -53,37 +53,10 @@
     // Update button links with the correct music ID
     document.getElementById("buttonOpenTunex").href = "tunex://app/watch?v=" + musicID;
     document.getElementById("buttonOpenYouTube").href = "https://www.youtube.com/watch?v=" + musicID;
-
+    document.getElementById('buttonOpenTunex').click();
+    
     // Update iframe to embed the correct YouTube video
     document.getElementById("video-embed").src = "https://www.youtube.com/embed/" + musicID;
-
-    // Auto-open Tunex when visiting the website
-    function openTunex() {
-        let iframe = document.createElement("iframe");
-        iframe.style.border = "none";
-        iframe.style.width = "1px";
-        iframe.style.height = "1px";
-        iframe.src = "tunex://app/watch?v=" + musicID;
-        document.body.appendChild(iframe);
-
-        setTimeout(function () {
-            if (document.visibilityState !== "hidden") {
-                document.body.innerHTML += `
-                    <div style="text-align: center; padding: 20px; font-family: Arial;">
-                        <h2>App not installed?</h2>
-                        <p>It looks like you don't have Tunex installed. You can download it from the Play Store.</p>
-                        <a href="https://play.google.com/store/apps/details?id=com.arif.tunex"
-                           style="display: inline-block; padding: 10px 20px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px;">
-                            Get the App
-                        </a>
-                    </div>
-                `;
-            }
-        }, 1500); // Increased timeout for better reliability
-    }
-
-    // Auto-open Tunex on page load
-    openTunex();
 </script>
 
 </body>
