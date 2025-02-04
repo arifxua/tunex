@@ -1,1 +1,40 @@
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Function to get URL parameters
+    function getParameterByName(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
 
+    // Get the music ID from the URL
+    var musicId = getParameterByName("id");
+
+    // Construct the app link with the extracted ID
+    if (musicId) {
+        var appLink = "com.arif.tunex://play/?id=" + encodeURIComponent(musicId);
+        var fallbackMessage = document.getElementById("fallback-message");
+
+        // Try to open the app
+        window.location.href = appLink;
+
+        // Check if the app opened or not
+        setTimeout(function () {
+            if (document.visibilityState !== "hidden") {
+                fallbackMessage.style.display = "block"; // Show message if app didn't open
+            }
+        }, 2000); // Wait for 2 seconds before showing fallback
+    } else {
+        console.error("Music ID not found in URL");
+    }
+});
+</script>
+
+<!-- Hidden fallback message (shown only if the app isn't installed) -->
+<div id="fallback-message" style="display: none; text-align: center; padding: 20px; font-family: Arial;">
+    <h2>App not installed?</h2>
+    <p>It looks like you don't have our app installed. You can download it from the Play Store.</p>
+    <a href="https://play.google.com/store/apps/details?id=app.package.name" 
+       style="display: inline-block; padding: 10px 20px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px;">
+        Get the App
+    </a>
+</div>
