@@ -1,12 +1,14 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <meta name="al:android:url" content="tunex://app/watch?v=GET_MUSIC_ID_FORM_BASE_URL">
-<meta name="al:android:package" content="com.arif.tunex">
-<title> - YouTube</title>
-<meta name="title" content=" - YouTube">
-<meta name="description" content="Enjoy the videos and music that you love, upload original content and share it all with friends, family and the world on YouTube.">
-    <style type="text/css">
+    <meta name="al:android:url" content="tunex://app/watch?v=GET_MUSIC_ID_FROM_URL">
+    <meta name="al:android:package" content="com.arif.tunex">
+    <title> - YouTube</title>
+    <meta name="title" content=" - YouTube">
+    <meta name="description" content="Enjoy the videos and music that you love, upload original content and share it all with friends, family, and the world on YouTube.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
         .button {
             border: none;
             color: white;
@@ -19,87 +21,70 @@
             cursor: pointer;
         }
 
-        .buttonGreen {
-            background-color: #4CAF50;
-        }
-
-        .buttonRed {
-            background-color: #f44336;
-        }
+        .buttonGreen { background-color: #4CAF50; }
+        .buttonRed { background-color: #f44336; }
         
         #video-embed {
             width: 100%;
             max-width: 560px;
         }
-        
-        #reel-it {
-            position: fixed;
-            bottom: 0px;
-            text-align: center;
-            left: 0px;
-            right: 0px;
-            padding: 20px 20px;
-            font-size: 95%;
-        }
     </style>
 </head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body>
+
 <div style="text-align: center;">
-    <a id="buttonOpenYMusic" class="button buttonGreen" href='tunex://app/watch?v=GET_MUSIC_ID_FORM_BASE_URL'>Open in YMusic</a>
-    <a id="buttonOpenYouTube" class="button buttonRed" href='https://www.youtube.com/watch?v=GET_MUSIC_ID_FORM_BASE_URL'>Open in YouTube</a>
+    <a id="buttonOpenTunex" class="button buttonGreen" href="#">Open in Tunex</a>
+    <a id="buttonOpenYouTube" class="button buttonRed" href="#">Open in YouTube</a>
     
-    <br/>
-    <br/>
-    
-    
-            <iframe id="video-embed" src="https://www.youtube.com/embed/GET_MUSIC_ID_FORM_BASE_URL" frameborder="0" 
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen></iframe>
-                
-            <script>
-                function updateIframeSize() {
-                    var element = document.getElementById('video-embed');
-                    element.style.height = (element.offsetWidth * 315 / 560) + 'px'; 
-                }
-                updateIframeSize();
-                window.onresize = function () {
-                    updateIframeSize();     
-                }
-            </script>
-    <script>
-        let fallbackFunction = function () {
-            window.location.replace('https://example.com');
-        };
-        document.getElementById("buttonOpenYMusic").addEventListener("click", function () {
-            ga('send', 'event', {
-                eventCategory: "open_ymusic",
-                eventAction: window.location.href.split('?')[0],
-                eventLabel: window.location.href,
-                transport: 'beacon'
-            });
+    <br/><br/>
 
-            let iframe = document.createElement("iframe");
-            iframe.style.border = "none";
-            iframe.style.width = "1px";
-            iframe.style.height = "1px";
-            iframe.src = 'ymusic://app/watch?v=GET_MUSIC_ID_FORM_BASE_URL';
-            document.body.appendChild(iframe);
-
-            setTimeout(fallbackFunction, 500);
-        });
-
-        document.getElementById("buttonOpenYouTube").addEventListener("click", function () {
-            ga('send', 'event', {
-                eventCategory: "open_youtube",
-                eventAction: window.location.href.split('?')[0],
-                eventLabel: event.target.href,
-                transport: 'beacon'
-            });
-        })
-    </script>
+    <iframe id="video-embed" src="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
+<script>
+    // Function to get the music ID from the 'v' parameter in the URL
+    function getMusicID() {
+        let urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get("v") || "FA9vqPWR0Ks"; // Default ID if not found
+    }
+
+    let musicID = getMusicID(); // Get the music ID from the URL
+
+    // Update button links with the correct music ID
+    document.getElementById("buttonOpenTunex").href = "tunex://app/watch?v=" + musicID;
+    document.getElementById("buttonOpenYouTube").href = "https://www.youtube.com/watch?v=" + musicID;
+
+    // Update iframe to embed the correct YouTube video
+    document.getElementById("video-embed").src = "https://www.youtube.com/embed/" + musicID;
+
+    // Auto-open Tunex when visiting the website
+    function openTunex() {
+        let iframe = document.createElement("iframe");
+        iframe.style.border = "none";
+        iframe.style.width = "1px";
+        iframe.style.height = "1px";
+        iframe.src = "tunex://app/watch?v=" + musicID;
+        document.body.appendChild(iframe);
+
+        setTimeout(function () {
+            if (document.visibilityState !== "hidden") {
+                document.body.innerHTML += `
+                    <div style="text-align: center; padding: 20px; font-family: Arial;">
+                        <h2>App not installed?</h2>
+                        <p>It looks like you don't have Tunex installed. You can download it from the Play Store.</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.arif.tunex"
+                           style="display: inline-block; padding: 10px 20px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px;">
+                            Get the App
+                        </a>
+                    </div>
+                `;
+            }
+        }, 1500); // Increased timeout for better reliability
+    }
+
+    // Auto-open Tunex on page load
+    openTunex();
+</script>
 
 </body>
 </html>
