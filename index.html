@@ -1,9 +1,8 @@
-
 <html>
 <head>
     <meta charset="utf-8"/>
-    <meta name="al:android:url" content="ymusic://app/watch?v=FA9vqPWR0Ks">
-<meta name="al:android:package" content="com.kapp.youtube.final">
+    <meta name="al:android:url" content="tunex://app/watch?v=GET_MUSIC_ID_FORM_BASE_URL">
+<meta name="al:android:package" content="com.arif.tunex">
 <title> - YouTube</title>
 <meta name="title" content=" - YouTube">
 <meta name="description" content="Enjoy the videos and music that you love, upload original content and share it all with friends, family and the world on YouTube.">
@@ -43,46 +42,18 @@
             font-size: 95%;
         }
     </style>
-
-    <!--Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78093029-6"></script>
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-        gtag('config', 'UA-78093029-6');
-        ga('create', 'UA-78093029-6', 'auto');
-        ga('send', 'pageview');
-    </script>
-    <!--End Google Analytics -->
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body>
 <div style="text-align: center;">
-    <a id="buttonOpenYMusic" class="button buttonGreen" href='ymusic://app/watch?v=FA9vqPWR0Ks'>Open in YMusic</a>
-    <a id="buttonOpenYouTube" class="button buttonRed" href='https://www.youtube.com/watch?v=FA9vqPWR0Ks'>Open in YouTube</a>
+    <a id="buttonOpenYMusic" class="button buttonGreen" href='tunex://app/watch?v=GET_MUSIC_ID_FORM_BASE_URL'>Open in YMusic</a>
+    <a id="buttonOpenYouTube" class="button buttonRed" href='https://www.youtube.com/watch?v=GET_MUSIC_ID_FORM_BASE_URL'>Open in YouTube</a>
     
     <br/>
     <br/>
     
     
-            <iframe id="video-embed" src="https://www.youtube.com/embed/FA9vqPWR0Ks" frameborder="0" 
+            <iframe id="video-embed" src="https://www.youtube.com/embed/GET_MUSIC_ID_FORM_BASE_URL" frameborder="0" 
                 allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen></iframe>
                 
@@ -96,15 +67,9 @@
                     updateIframeSize();     
                 }
             </script>
-        
-
-    <p id="reel-it">
-     <a href="https://zklite.io/">zkLite.io</a> - DEX with order-book on zkSync Lite</a>
-    </p>
-
     <script>
         let fallbackFunction = function () {
-            window.location.replace('https://ymusic.io');
+            window.location.replace('https://example.com');
         };
         document.getElementById("buttonOpenYMusic").addEventListener("click", function () {
             ga('send', 'event', {
@@ -118,7 +83,7 @@
             iframe.style.border = "none";
             iframe.style.width = "1px";
             iframe.style.height = "1px";
-            iframe.src = 'ymusic://app/watch?v=FA9vqPWR0Ks';
+            iframe.src = 'ymusic://app/watch?v=GET_MUSIC_ID_FORM_BASE_URL';
             document.body.appendChild(iframe);
 
             setTimeout(fallbackFunction, 500);
